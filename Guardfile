@@ -5,7 +5,6 @@ guard :bundler do
   watch 'payex.gemspec'
 end
 
-guard :rspec do
-  watch 'lib'
-  watch 'spec'
+guard :rspec, cli: '--color', bundler: false do
+  watch(%r'^(lib|spec)/') { 'spec' }
 end

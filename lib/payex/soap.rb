@@ -1,4 +1,5 @@
 require 'savon'
+require 'nori'
 
 module PayEx::SOAPEndpoint
   def wsdl(value=nil)
@@ -35,7 +36,8 @@ end
 class PayEx::SOAPInvocation < Struct.new(:wsdl, :name, :param_options, :params)
   def call
     client = Savon.client(wsdl)
-    client.request(name, body: body).to_hash
+    response = client.request(name, body: body)
+    Nori.parse(response.body)[:payex]
   end
 
   def body

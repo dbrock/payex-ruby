@@ -6,5 +6,12 @@ Gem::Specification.new do |gem|
   gem.summary = 'PayEx SOAP API glue'
   gem.author = 'Daniel Brockman'
   gem.files = `git ls-files 2>/dev/null`.split($\)
+
   gem.add_dependency 'savon', '~> 1.1'
+
+  gem.add_development_dependency 'guard', '~> 1.3'
+  gem.add_development_dependency 'guard-bundler', '~> 1.0'
+  gem.add_development_dependency 'guard-rspec', '~> 1.2'
+  gem.add_development_dependency 'rspec', '~> 2.11'
+  gem.add_development_dependency 'savon_spec', '~> 1.3'
 end

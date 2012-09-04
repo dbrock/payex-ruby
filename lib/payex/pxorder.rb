@@ -1,4 +1,4 @@
-module PayEx::API::PxOrder
+module PayEx::PxOrder
   extend self
 
   def wsdl

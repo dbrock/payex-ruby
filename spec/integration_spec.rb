@@ -31,7 +31,7 @@ describe PayEx do
       'clientLanguage' => ''
     }
 
-    expected['hash'] = PayEx::API::Util.signed_hash(expected.values.join)
+    expected['hash'] = PayEx::API.signed_hash(expected.values.join)
     savon.expects('Initialize7').with(expected).returns(:initialize_ok)
 
     href = PayEx.authorize_transaction! 'order123',

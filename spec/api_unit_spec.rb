@@ -2,13 +2,13 @@
 require 'payex'
 require 'spec_helper'
 
-describe PayEx::API::Util do
+describe PayEx::API do
   before {
     PayEx.encryption_key = 'foo'
   }
 
   it 'should know how to stringify keys' do
-    PayEx::API::Util.stringify_keys(a: 1, b: 2).
+    PayEx::API.stringify_keys(a: 1, b: 2).
       should == { 'a' => 1, 'b' => 2 }
   end
 
@@ -25,7 +25,7 @@ describe PayEx::API::Util do
       end
     end
 
-    actual = PayEx::API::Util.sign_params(param_hash, specs)
+    actual = PayEx::API.sign_params(param_hash, specs)
 
     to_sign = param_array.join + PayEx.encryption_key
     expected = Digest::MD5.hexdigest(to_sign)
@@ -34,27 +34,27 @@ describe PayEx::API::Util do
   end
 
   it 'should know how to add defaults' do
-    PayEx::API::Util.parse_param(nil, { default: 2 }).should == 2
+    PayEx::API.parse_param(nil, { default: 2 }).should == 2
   end
 
   it 'should know how to call default procs' do
-    PayEx::API::Util.parse_param(nil, { default: proc { 2 } }).should == 2
+    PayEx::API.parse_param(nil, { default: proc { 2 } }).should == 2
   end
 
   it 'should reject wrong type of value' do
     proc {
-      PayEx::API::Util.parse_param('foobar', { format: Integer })
+      PayEx::API.parse_param('foobar', { format: Integer })
     }.should raise_error PayEx::API::ParamError
   end
 
   it 'should reject strings based on regular expressions' do
     proc {
-      PayEx::API::Util.parse_param('foobar', { format: /^.{,3}$/ })
+      PayEx::API.parse_param('foobar', { format: /^.{,3}$/ })
     }.should raise_error PayEx::API::ParamError
   end
 
   it 'should stringify keys when parsing params' do
-    PayEx::API::Util.parse_params({ a: 1 }, { 'b' => { default: 2 } }).
+    PayEx::API.parse_params({ a: 1 }, { 'b' => { default: 2 } }).
       should == { 'a' => 1, 'b' => 2 }
   end
 end

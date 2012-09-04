@@ -7,10 +7,18 @@ module PayEx::API
   class ParamError < StandardError; end
 
   def invoke! wsdl, name, params, specs
-    client = Savon.client(wsdl)
     body = PayEx::API::Util.get_request_body(params, specs)
-    response = client.request(name, body: body)
-    Nori.parse(response.body)[:payex]
+    response = Savon.client(wsdl).request(name, body: body) {
+      http.headers.delete('SOAPAction')
+    }.body
+    # Unwrap <Initialize8Response>
+    response = response[response.keys.first]
+    # Unwrap <Initialize8Result>
+    response = response[response.keys.first]
+    # Embedded XML document contains result
+    response = Nori.parse(response)
+    # Unwrap <payex>
+    response = response[response.keys.first]
   end
 end
 

@@ -19,6 +19,10 @@ module PayEx::API::PxOrder
         signed: true,
         format: Integer
       },
+      'priceArgList' => {
+        signed: true,
+        default: ''
+      },
       'currency' => {
         signed: true,
         default: proc { PayEx.default_currency }
@@ -43,6 +47,18 @@ module PayEx::API::PxOrder
       'clientIPAddress' => {
         signed: true
       },
+      'clientIdentifier' => {
+        signed: true,
+        default: ''
+      },
+      'additionalValues' => {
+        signed: true,
+        default: ''
+      },
+      'externalID' => {
+        signed: true,
+        default: ''
+      },
       'returnUrl' => {
         signed: true
       },
@@ -50,9 +66,17 @@ module PayEx::API::PxOrder
         signed: true,
         default: 'CREDITCARD'
       },
+      'agreementRef' => {
+        signed: true,
+        default: ''
+      },
       'cancelUrl' => {
         signed: true,
-        default: nil
+        default: ''
+      },
+      'clientLanguage' => {
+        signed: true,
+        default: ''
       }
     }
   end

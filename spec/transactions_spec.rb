@@ -13,14 +13,21 @@ describe PayEx do
       'accountNumber' => 'foo-account',
       'purchaseOperation' => 'SALE',
       'price' => 12300,
+      'priceArgList' => '',
       'currency' => 'SEK',
       'vat' => 0,
       'orderID' => 'order123',
       'productNumber' => 'PRODUCT123',
       'description' => 'Product description',
       'clientIPAddress' => '12.34.56.78',
+      'clientIdentifier' => '',
+      'additionalValues' => '',
+      'externalID' => '',
       'returnUrl' => 'http://example.com/payex-callback',
-      'view' => 'CREDITCARD'
+      'view' => 'CREDITCARD',
+      'agreementRef' => '',
+      'cancelUrl' => '',
+      'clientLanguage' => ''
     }
 
     expected['hash'] = PayEx::API::Util.signed_hash(expected.values.join)

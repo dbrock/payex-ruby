@@ -11,7 +11,7 @@ describe PayEx do
   it 'should send request and parse response' do
     expected = {
       'accountNumber' => 'foo-account',
-      'purchaseOperation' => 'SALE',
+      'purchaseOperation' => 'AUTHORIZATION',
       'price' => 12300,
       'priceArgList' => '',
       'currency' => 'SEK',

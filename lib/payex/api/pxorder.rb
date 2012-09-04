@@ -13,7 +13,7 @@ module PayEx::API::PxOrder
       },
       'purchaseOperation' => {
         signed: true,
-        default: 'SALE'
+        default: 'AUTHORIZATION'
       },
       'price' => {
         signed: true,

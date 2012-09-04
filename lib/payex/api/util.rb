@@ -56,7 +56,7 @@ module PayEx::API::Util
     end
 
     if options.include?(:format) and not options[:format] === result
-      param_error! %{#{options[:format].inspect} required}
+      param_error! %{must match #{options[:format].inspect}}
     else
       result
     end

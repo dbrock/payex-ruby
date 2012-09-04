@@ -12,8 +12,7 @@ module PayEx::API::PxOrder
         default: proc { PayEx.account_number! }
       },
       'purchaseOperation' => {
-        signed: true,
-        default: 'AUTHORIZATION'
+        signed: true
       },
       'price' => {
         signed: true,

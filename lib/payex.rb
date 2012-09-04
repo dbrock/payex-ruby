@@ -9,6 +9,8 @@ module PayEx
     attr_accessor :base_url
     attr_accessor :account_number
     attr_accessor :encryption_key
+    attr_accessor :return_url
+    attr_accessor :cancel_url
   end
 end
 

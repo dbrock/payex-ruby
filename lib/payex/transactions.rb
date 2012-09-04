@@ -1,17 +1,15 @@
-def PayEx.initialize_transaction! params
+def PayEx.authorize_transaction! order_id, params
   response = PayEx::API::PxOrder.Initialize7 \
-    orderID: params[:order_id],
-    clientIPAddress: params[:ip],
-    productNumber: params[:product_id],
-    description: params[:description],
+    orderID: order_id,
+    purchaseOperation: 'AUTHORIZATION',
+    productNumber: params[:product_number],
+    description: params[:product_description],
     price: params[:price],
-    returnUrl: params[:callback],
-    cancelUrl: params[:cancel_callback]
+    clientIPAddress: params[:customer_ip],
+    returnUrl: PayEx.return_url,
+    cancelUrl: PayEx.cancel_url
 
-  {
-    id: response[:order_ref],
-    href: response[:redirect_url]
-  }
+  response[:redirect_url]
 end
 
 def PayEx.complete_transaction! id
@@ -20,10 +18,18 @@ def PayEx.complete_transaction! id
   status = response[:transaction_status]
   status = PayEx.parse_transaction_status(status)
 
-  {
-    id: response[:transaction_number],
-    status: status
-  }
+  case status
+  when :sale, :authorize
+    response[:order_id]
+  when :initialize
+    raise PayEx::Error, 'Transaction not completed'
+  when :failure
+    message = response[:error_details][:third_party_error] rescue nil
+    raise PayEx::Error, message
+  else
+    raise PayEx::Error, 'Unexpected transaction status: ' +
+      status.to_s.upcase
+  end
 end
 
 def PayEx.parse_transaction_status(status)

@@ -6,6 +6,7 @@ describe PayEx do
   before {
     PayEx.account_number = 'foo-account'
     PayEx.encryption_key = 'foo-secret'
+    PayEx.return_url = 'http://example.com/payex-callback'
   }
 
   it 'should send request and parse response' do
@@ -33,14 +34,12 @@ describe PayEx do
     expected['hash'] = PayEx::API::Util.signed_hash(expected.values.join)
     savon.expects('Initialize7').with(expected).returns(:initialize_ok)
 
-    transaction = PayEx.initialize_transaction! \
-      order_id: 'order123',
-      ip: '12.34.56.78',
-      product_id: 'PRODUCT123',
-      description: 'Product description',
+    href = PayEx.authorize_transaction! 'order123',
+      product_number: 'PRODUCT123',
+      product_description: 'Product description',
       price: 12300,
-      callback: 'http://example.com/payex-callback'
+      customer_ip: '12.34.56.78'
 
-    transaction[:href].should include transaction[:id]
+    href.should include 'http'
   end
 end

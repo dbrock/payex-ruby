@@ -49,6 +49,10 @@ module PayEx::API::PxOrder
       'view' => {
         signed: true,
         default: 'CREDITCARD'
+      },
+      'cancelUrl' => {
+        signed: true,
+        default: nil
       }
     }
   end

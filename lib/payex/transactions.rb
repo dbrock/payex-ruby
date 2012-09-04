@@ -1,5 +1,5 @@
 def PayEx.initialize_transaction! params
-  response = PayEx::API::PxOrder.Initialize8 \
+  response = PayEx::API::PxOrder.Initialize7 \
     orderID: params[:order_id],
     clientIPAddress: params[:ip],
     productNumber: params[:product_id],

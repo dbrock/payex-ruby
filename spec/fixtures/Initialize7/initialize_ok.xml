@@ -3,8 +3,8 @@
               xmlns:xsd="http://www.w3.org/2001/XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <env:Body>
-    <Initialize8Response xmlns="http://external.payex.com/PxOrder/">
-      <Initialize8Result>
+    <Initialize7Response xmlns="http://external.payex.com/PxOrder/">
+      <Initialize7Result>
         <![CDATA[
           <?xml version="1.0" encoding="utf-8"?>
           <payex>
@@ -24,7 +24,7 @@
             <redirectUrl>https://test-confined.payex.com/PxOrderCC.aspx?orderRef=b93d29bf7df3424cac23407a987c0be9</redirectUrl>
           </payex>
         ]]>
-      </Initialize8Result>
-    </Initialize8Response>
+      </Initialize7Result>
+    </Initialize7Response>
   </env:Body>
 </env:Envelope>

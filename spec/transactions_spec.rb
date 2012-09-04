@@ -24,7 +24,7 @@ describe PayEx do
     }
 
     expected['hash'] = PayEx::API::Util.signed_hash(expected.values.join)
-    savon.expects('Initialize8').with(expected).returns(:initialize_ok)
+    savon.expects('Initialize7').with(expected).returns(:initialize_ok)
 
     transaction = PayEx.initialize_transaction! \
       order_id: 'order123',

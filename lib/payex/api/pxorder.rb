@@ -5,8 +5,8 @@ module PayEx::API::PxOrder
     '%s/pxorder/pxorder.asmx?WSDL' % PayEx.base_url
   end
 
-  def Initialize8(params)
-    PayEx::API.invoke! wsdl, 'Initialize8', params, {
+  def Initialize7(params)
+    PayEx::API.invoke! wsdl, 'Initialize7', params, {
       'accountNumber' => {
         signed: true,
         default: proc { PayEx.account_number! }

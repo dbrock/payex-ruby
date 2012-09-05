@@ -68,7 +68,7 @@ def PayEx.complete_transaction! id
     error = 'Unexpected transaction status: ' + status.to_s.upcase
   end
 
-  [response[:order_id], error]
+  [response[:order_id], error, response]
 end
 
 def PayEx.parse_transaction_status(status)

@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |gem|
   gem.name = 'payex'
-  gem.version = '0.0.2'
+  gem.version = '0.1.0'
   gem.summary = 'PayEx SOAP API glue'
   gem.author = 'Daniel Brockman'
   gem.files = `git ls-files 2>/dev/null`.split($\)

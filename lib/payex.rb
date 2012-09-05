@@ -49,10 +49,13 @@ def PayEx.complete_transaction! id
 
   status = response[:transaction_status]
   status = PayEx.parse_transaction_status(status)
+  error = nil
 
   case status
   when :sale, :authorize
-    error = nil
+    if response[:already_completed]
+      error = 'Transaction already completed'
+    end
   when :initialize
     error = 'Transaction not completed'
   when :failure
@@ -65,7 +68,7 @@ def PayEx.complete_transaction! id
     error = 'Unexpected transaction status: ' + status.to_s.upcase
   end
 
-  [response[:order_id], error]
+  [response[:order_id], error, response]
 end
 
 def PayEx.parse_transaction_status(status)

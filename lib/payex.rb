@@ -53,7 +53,7 @@ def PayEx.complete_transaction! id
 
   case status
   when :sale, :authorize
-    if response[:already_completed]
+    if response[:already_completed] == 'True'
       error = 'Transaction already completed'
     end
   when :initialize

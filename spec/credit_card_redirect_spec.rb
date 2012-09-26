@@ -45,7 +45,7 @@ describe PayEx do
     expected['hash'] = PayEx::API.signed_hash(expected.values.join)
     savon.expects('Initialize7').with(expected).returns(:initialize_ok)
 
-    href = PayEx.authorize_transaction! SAMPLE_ORDER_ID,
+    href = PayEx::CreditCardRedirect.authorize_transaction! SAMPLE_ORDER_ID,
       product_number: SAMPLE_PRODUCT_NUMBER,
       product_description: SAMPLE_PRODUCT_DESCRIPTION,
       price: SAMPLE_PRICE_CENTS,

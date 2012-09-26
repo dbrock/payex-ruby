@@ -18,25 +18,24 @@ module PayEx::CreditCardRedirect
   def complete_transaction! id
     response = PayEx::PxOrder.Complete(orderRef: id)
 
-    status = response['transaction_status']
+    status = response[:transaction_status]
     status = PayEx::API.parse_transaction_status(status)
-    error = nil
 
     case status
-    when :sale, :authorize
-      if response[:already_completed] == 'True'
-        error = 'Transaction already completed'
-      end
+    when :authorize
+      error = nil
     when :initialize
-      error = 'Transaction not completed'
+      error = PayEx::Error.new('Transaction not completed')
     when :failure
-      begin
-        error = response[:error_details][:third_party_error]
-      rescue
-        error = 'Transaction failed'
+      details = response[:error_details].inspect
+      case details
+      when /declined/i
+        error = PayEx::Error::CardDeclined.new('Card declined')
+      else
+        error = PayEx::Error.new('Transaction failed')
       end
     else
-      error = 'Unexpected transaction status: ' + status.to_s.upcase
+      error = PayEx::Error.new('Transaction failed')
     end
 
     [response[:order_id], error, response]

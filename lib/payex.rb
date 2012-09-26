@@ -1,8 +1,6 @@
 module PayEx
   extend self
 
-  class Error < StandardError; end
-
   TEST_URL = 'https://test-external.payex.com'
   LIVE_URL = 'https://external.payex.com'
 
@@ -22,6 +20,9 @@ module PayEx
     encryption_key or fail 'Please set PayEx.encryption_key'
   end
 end
+
+class PayEx::Error < StandardError; end
+class PayEx::Error::CardDeclined < PayEx::Error; end
 
 require 'payex/api'
 require 'payex/api/pxorder'

@@ -9,8 +9,8 @@
           <?xml version="1.0" encoding="utf-8" ?>
           <payex>
             <header name="Payex Header v1.0">
-              <id>37fc4964d8b64602b33f79d040c1d2c8</id>
-              <date>2012-09-26 14:25:23</date>
+              <id>dd473e0a40f54596b6db441b34bf54d9</id>
+              <date>2012-09-26 14:08:09</date>
             </header>
             <status>
               <code>OK</code>
@@ -21,8 +21,8 @@
             </status>
             <transactionStatus>5</transactionStatus>
             <orderStatus>0</orderStatus>
-            <transactionRef>959bc6c8de264813bb6eca9cdc4035df</transactionRef>
-            <transactionNumber>1024426</transactionNumber>
+            <transactionRef>6d0b1a8e7ab2480583b32f52dba782fe</transactionRef>
+            <transactionNumber>1024377</transactionNumber>
             <orderId>SAMPLEORDERID0001</orderId>
             <productId>SAMPLEPRODUCTNUMBER0001</productId>
             <paymentMethod>VISA</paymentMethod>

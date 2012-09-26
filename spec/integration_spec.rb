@@ -3,28 +3,37 @@ require 'payex'
 require 'spec_helper'
 
 describe PayEx do
+  SAMPLE_RETURN_URL = 'http://example.com/payex-callback'
+  SAMPLE_ACCOUNT_NUMBER = 'SAMPLEACCOUNTNUMBER0001'
+  SAMPLE_ENCRYPTION_KEY = 'SAMPLEENCRYPTIONKEY0001'
+  SAMPLE_PRICE_CENTS = 12300
+  SAMPLE_ORDER_ID = 'SAMPLEORDERID0001'
+  SAMPLE_PRODUCT_NUMBER = 'SAMPLEPRODUCTNUMBER0001'
+  SAMPLE_PRODUCT_DESCRIPTION = 'Sample product description 0001'
+  SAMPLE_IP_ADDRESS = '12.34.56.78'
+
   before {
-    PayEx.account_number = 'foo-account'
-    PayEx.encryption_key = 'foo-secret'
-    PayEx.return_url = 'http://example.com/payex-callback'
+    PayEx.account_number = SAMPLE_ACCOUNT_NUMBER
+    PayEx.encryption_key = SAMPLE_ENCRYPTION_KEY
+    PayEx.return_url = SAMPLE_RETURN_URL
   }
 
   it 'should send request and parse response' do
     expected = {
-      'accountNumber' => 'foo-account',
+      'accountNumber' => SAMPLE_ACCOUNT_NUMBER,
       'purchaseOperation' => 'AUTHORIZATION',
-      'price' => 12300,
+      'price' => SAMPLE_PRICE_CENTS,
       'priceArgList' => '',
       'currency' => 'SEK',
       'vat' => 0,
-      'orderID' => 'order123',
-      'productNumber' => 'PRODUCT123',
-      'description' => 'Product description',
-      'clientIPAddress' => '12.34.56.78',
+      'orderID' => SAMPLE_ORDER_ID,
+      'productNumber' => SAMPLE_PRODUCT_NUMBER,
+      'description' => SAMPLE_PRODUCT_DESCRIPTION,
+      'clientIPAddress' => SAMPLE_IP_ADDRESS,
       'clientIdentifier' => '',
       'additionalValues' => '',
       'externalID' => '',
-      'returnUrl' => 'http://example.com/payex-callback',
+      'returnUrl' => SAMPLE_RETURN_URL,
       'view' => 'CREDITCARD',
       'agreementRef' => '',
       'cancelUrl' => '',
@@ -34,11 +43,11 @@ describe PayEx do
     expected['hash'] = PayEx::API.signed_hash(expected.values.join)
     savon.expects('Initialize7').with(expected).returns(:initialize_ok)
 
-    href = PayEx.authorize_transaction! 'order123',
-      product_number: 'PRODUCT123',
-      product_description: 'Product description',
-      price: 12300,
-      customer_ip: '12.34.56.78'
+    href = PayEx.authorize_transaction! SAMPLE_ORDER_ID,
+      product_number: SAMPLE_PRODUCT_NUMBER,
+      product_description: SAMPLE_PRODUCT_DESCRIPTION,
+      price: SAMPLE_PRICE_CENTS,
+      customer_ip: SAMPLE_IP_ADDRESS
 
     href.should include 'http'
   end

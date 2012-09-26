@@ -63,18 +63,19 @@ describe PayEx::CreditCardRedirect do
   SAMPLE_ORDER_REF = 'SAMPLEORDERREF0001'
 
   describe :complete_transaction! do
-    example 'successful completion' do
+    def invoke_complete! response_fixture
       expected = {
         'accountNumber' => SAMPLE_ACCOUNT_NUMBER,
         'orderRef' => SAMPLE_ORDER_REF
       }
 
       expected['hash'] = PayEx::API.signed_hash(expected.values.join)
-      savon.expects('Complete').with(expected).returns(:complete_ok)
+      savon.expects('Complete').with(expected).returns(response_fixture)
+      PayEx::CreditCardRedirect.complete_transaction! SAMPLE_ORDER_REF
+    end
 
-      order_id, error, data = PayEx::CreditCardRedirect.
-        complete_transaction! SAMPLE_ORDER_REF
-
+    example 'successful completion' do
+      order_id, error, data = invoke_complete! :complete_ok
       order_id.should == SAMPLE_ORDER_ID
     end
   end

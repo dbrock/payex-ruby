@@ -20,7 +20,7 @@ describe PayEx do
     PayEx.default_currency = SAMPLE_DEFAULT_CURRENCY
   }
 
-  it 'should send request and parse response' do
+  example 'authorize transaction successfully' do
     expected = {
       'accountNumber' => SAMPLE_ACCOUNT_NUMBER,
       'purchaseOperation' => 'AUTHORIZATION',

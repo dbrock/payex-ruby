@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     payex (0.2.dev)
+      httpclient (~> 2.2)
       nori (~> 1.1)
       savon (~> 1.1)
 
@@ -23,6 +24,7 @@ GEM
       guard (>= 1.1)
     gyoku (0.4.6)
       builder (>= 2.1.2)
+    httpclient (2.2.7)
     httpi (1.1.1)
       rack
     listen (0.5.2)

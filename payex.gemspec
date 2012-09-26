@@ -7,6 +7,7 @@ Gem::Specification.new do |gem|
   gem.author = 'Daniel Brockman'
   gem.files = `git ls-files 2>/dev/null`.split($\)
 
+  gem.add_dependency 'httpclient', '~> 2.2'
   gem.add_dependency 'nori', '~> 1.1'
   gem.add_dependency 'savon', '~> 1.1'
 

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    payex (0.0.2)
+    payex (0.2.dev)
       nori (~> 1.1)
       savon (~> 1.1)
 

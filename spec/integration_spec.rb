@@ -3,7 +3,6 @@ require 'payex'
 require 'spec_helper'
 
 describe PayEx do
-  SAMPLE_RETURN_URL = 'http://example.com/payex-callback'
   SAMPLE_ACCOUNT_NUMBER = 'SAMPLEACCOUNTNUMBER0001'
   SAMPLE_ENCRYPTION_KEY = 'SAMPLEENCRYPTIONKEY0001'
   SAMPLE_PRICE_CENTS = 12300
@@ -11,11 +10,11 @@ describe PayEx do
   SAMPLE_PRODUCT_NUMBER = 'SAMPLEPRODUCTNUMBER0001'
   SAMPLE_PRODUCT_DESCRIPTION = 'Sample product description 0001'
   SAMPLE_IP_ADDRESS = '12.34.56.78'
+  SAMPLE_RETURN_URL = 'http://example.com/payex-return'
 
   before {
     PayEx.account_number = SAMPLE_ACCOUNT_NUMBER
     PayEx.encryption_key = SAMPLE_ENCRYPTION_KEY
-    PayEx.return_url = SAMPLE_RETURN_URL
   }
 
   it 'should send request and parse response' do
@@ -47,7 +46,8 @@ describe PayEx do
       product_number: SAMPLE_PRODUCT_NUMBER,
       product_description: SAMPLE_PRODUCT_DESCRIPTION,
       price: SAMPLE_PRICE_CENTS,
-      customer_ip: SAMPLE_IP_ADDRESS
+      customer_ip: SAMPLE_IP_ADDRESS,
+      return_url: SAMPLE_RETURN_URL
 
     href.should include 'http'
   end

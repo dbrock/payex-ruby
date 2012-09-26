@@ -12,7 +12,6 @@ module PayEx
   attr_accessor :account_number
   attr_accessor :encryption_key
 
-  attr_accessor :return_url
   attr_accessor :cancel_url
 end
 
@@ -38,7 +37,7 @@ def PayEx.authorize_transaction! order_id, params
     description: params[:product_description],
     price: params[:price],
     clientIPAddress: params[:customer_ip],
-    returnUrl: PayEx.return_url,
+    returnUrl: params[:return_url],
     cancelUrl: PayEx.cancel_url
 
   response[:redirect_url]

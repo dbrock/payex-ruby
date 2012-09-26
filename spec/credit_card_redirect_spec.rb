@@ -84,5 +84,11 @@ describe PayEx::CreditCardRedirect do
       order_id.should == SAMPLE_ORDER_ID
       error.should_not == nil
     end
+
+    example 'card declined' do
+      order_id, error, data = invoke_complete! :complete_declined
+      order_id.should == SAMPLE_ORDER_ID
+      error.should_not == nil
+    end
   end
 end

@@ -11,8 +11,6 @@ module PayEx
 
   attr_accessor :account_number
   attr_accessor :encryption_key
-
-  attr_accessor :cancel_url
 end
 
 PayEx.default_currency = 'SEK'
@@ -38,7 +36,7 @@ def PayEx.authorize_transaction! order_id, params
     price: params[:price],
     clientIPAddress: params[:customer_ip],
     returnUrl: params[:return_url],
-    cancelUrl: PayEx.cancel_url
+    cancelUrl: params[:cancel_url]
 
   response[:redirect_url]
 end

@@ -11,6 +11,7 @@ describe PayEx do
   SAMPLE_PRODUCT_DESCRIPTION = 'Sample product description 0001'
   SAMPLE_IP_ADDRESS = '12.34.56.78'
   SAMPLE_RETURN_URL = 'http://example.com/payex-return'
+  SAMPLE_CANCEL_URL = 'http://example.com/payex-cancel'
 
   before {
     PayEx.account_number = SAMPLE_ACCOUNT_NUMBER
@@ -35,7 +36,7 @@ describe PayEx do
       'returnUrl' => SAMPLE_RETURN_URL,
       'view' => 'CREDITCARD',
       'agreementRef' => '',
-      'cancelUrl' => '',
+      'cancelUrl' => SAMPLE_CANCEL_URL,
       'clientLanguage' => ''
     }
 
@@ -47,7 +48,8 @@ describe PayEx do
       product_description: SAMPLE_PRODUCT_DESCRIPTION,
       price: SAMPLE_PRICE_CENTS,
       customer_ip: SAMPLE_IP_ADDRESS,
-      return_url: SAMPLE_RETURN_URL
+      return_url: SAMPLE_RETURN_URL,
+      cancel_url: SAMPLE_CANCEL_URL
 
     href.should include 'http'
   end

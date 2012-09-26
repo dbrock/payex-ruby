@@ -18,7 +18,7 @@ module PayEx::CreditCardRedirect
   def complete_transaction! id
     response = PayEx::PxOrder.Complete(orderRef: id)
 
-    status = response[:transaction_status]
+    status = response['transaction_status']
     status = PayEx::API.parse_transaction_status(status)
     error = nil
 

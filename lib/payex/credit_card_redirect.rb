@@ -1,9 +1,9 @@
 module PayEx::CreditCardRedirect
   extend self
 
-  def initialize_transaction! order_id, params
+  def initialize_transaction! params
     response = PayEx::PxOrder.Initialize7 \
-      orderID: order_id,
+      orderID: params[:order_id],
       purchaseOperation: 'AUTHORIZATION',
       productNumber: params[:product_number],
       description: params[:product_description],

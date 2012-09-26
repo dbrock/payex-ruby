@@ -78,5 +78,11 @@ describe PayEx::CreditCardRedirect do
       order_id, error, data = invoke_complete! :complete_ok
       order_id.should == SAMPLE_ORDER_ID
     end
+
+    example 'unexpected failure' do
+      order_id, error, data = invoke_complete! :complete_failed
+      order_id.should == SAMPLE_ORDER_ID
+      error.should_not == nil
+    end
   end
 end

@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"
-              xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <env:Body>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
     <Initialize7Response xmlns="http://external.payex.com/PxOrder/">
       <Initialize7Result>
         <![CDATA[
-          <?xml version="1.0" encoding="utf-8"?>
+          <?xml version="1.0" encoding="utf-8" ?>
           <payex>
             <header name="Payex Header v1.0">
-              <id>4e0fbe36b146452b8ce7b87e6186a3e3</id>
-              <date>2010-11-10 06:13:48</date>
+              <id>07507411082c45aaa8a58f961a47b0f8</id>
+              <date>2012-09-26 14:07:42</date>
             </header>
             <status>
               <code>OK</code>
               <description>OK</description>
               <errorCode>OK</errorCode>
-              <paramName/>
-              <thirdPartyError/>
+              <paramName />
+              <thirdPartyError />
             </status>
-            <orderRef>b93d29bf7df3424cac23407a987c0be9</orderRef>
-            <sessionRef>7807accc0e7e4d069e1d92ec5680d0cc</sessionRef>
-            <redirectUrl>https://test-confined.payex.com/PxOrderCC.aspx?orderRef=b93d29bf7df3424cac23407a987c0be9</redirectUrl>
+            <orderRef>67d7e7d3b4134741a3297480dca6d899</orderRef>
+            <sessionRef>d22235c662eb45bfa524a1319903a434</sessionRef>
+            <redirectUrl>https://test-confined.payex.com/PxOrderCC.aspx?orderRef=67d7e7d3b4134741a3297480dca6d899</redirectUrl>
           </payex>
         ]]>
       </Initialize7Result>
     </Initialize7Response>
-  </env:Body>
-</env:Envelope>
+  </soap:Body>
+</soap:Envelope>

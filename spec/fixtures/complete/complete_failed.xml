@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <CompleteResponse xmlns="http://external.payex.com/PxOrder/">
+      <CompleteResult>
+        <![CDATA[
+          <?xml version="1.0" encoding="utf-8" ?>
+          <payex>
+            <header name="Payex Header v1.0">
+              <id>3c365d86c6eb42e9942bae9097ebb81d</id>
+              <date>2012-09-26 14:20:02</date>
+            </header>
+            <status>
+              <code>OK</code>
+              <description>OK</description>
+              <errorCode>OK</errorCode>
+              <paramName />
+              <thirdPartyError />
+            </status>
+            <transactionStatus>5</transactionStatus>
+            <orderStatus>0</orderStatus>
+            <transactionRef>5049f8ac5a91456c8fb58dbaf98f5eb5</transactionRef>
+            <transactionNumber>1024415</transactionNumber>
+            <orderId>SAMPLEORDERID0001</orderId>
+            <productId>SAMPLEPRODUCTNUMBER0001</productId>
+            <paymentMethod>VISA</paymentMethod>
+            <amount>12300</amount>
+            <alreadyCompleted>False</alreadyCompleted>
+            <Csid>00000001-4581-0903-5682-000000000000</Csid>
+            <errorDetails>
+              <transactionErrorCode>Error_Generic</transactionErrorCode>
+              <transactionErrorDescription>Accomplish3rdParty</transactionErrorDescription>
+              <transactionThirdPartyError>9098</transactionThirdPartyError>
+            </errorDetails>
+            <clientAccount>0</clientAccount>
+            <productNumber>SAMPLEPRODUCTNUMBER0001</productNumber>
+            <clientGsmNumber />
+            <transactionFailedReason />
+            <BankHash>00000001-4581-0903-5682-000000000000</BankHash>
+            <AuthenticatedWith>N</AuthenticatedWith>
+            <AuthenticatedStatus />
+            <maskedNumber>45**********5682</maskedNumber>
+            <fraudData>false</fraudData>
+            <pending>false</pending>
+          </payex>
+        ]]>
+      </CompleteResult>
+    </CompleteResponse>
+  </soap:Body>
+</soap:Envelope>

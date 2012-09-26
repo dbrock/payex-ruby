@@ -19,6 +19,10 @@ module PayEx
   def encryption_key!
     encryption_key or fail 'Please set PayEx.encryption_key'
   end
+
+  def default_currency!
+    default_currency or fail 'Please set PayEx.default_currency'
+  end
 end
 
 class PayEx::Error < StandardError; end

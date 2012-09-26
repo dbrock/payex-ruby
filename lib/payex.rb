@@ -13,7 +13,6 @@ module PayEx
   attr_accessor :encryption_key
 end
 
-PayEx.default_currency = 'SEK'
 PayEx.base_url = PayEx::TEST_URL
 
 require 'payex/api'

@@ -12,10 +12,12 @@ describe PayEx do
   SAMPLE_IP_ADDRESS = '12.34.56.78'
   SAMPLE_RETURN_URL = 'http://example.com/payex-return'
   SAMPLE_CANCEL_URL = 'http://example.com/payex-cancel'
+  SAMPLE_DEFAULT_CURRENCY = 'SEK'
 
   before {
     PayEx.account_number = SAMPLE_ACCOUNT_NUMBER
     PayEx.encryption_key = SAMPLE_ENCRYPTION_KEY
+    PayEx.default_currency = SAMPLE_DEFAULT_CURRENCY
   }
 
   it 'should send request and parse response' do
@@ -24,7 +26,7 @@ describe PayEx do
       'purchaseOperation' => 'AUTHORIZATION',
       'price' => SAMPLE_PRICE_CENTS,
       'priceArgList' => '',
-      'currency' => 'SEK',
+      'currency' => SAMPLE_DEFAULT_CURRENCY,
       'vat' => 0,
       'orderID' => SAMPLE_ORDER_ID,
       'productNumber' => SAMPLE_PRODUCT_NUMBER,

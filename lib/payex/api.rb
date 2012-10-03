@@ -98,4 +98,17 @@ module PayEx::API
   def param_error! message
     raise ParamError, message
   end
+
+  def parse_transaction_status(status)
+    case status.to_s
+    when '0' then :sale
+    when '1' then :initialize
+    when '2' then :credit
+    when '3' then :authorize
+    when '4' then :cancel
+    when '5' then :failure
+    when '6' then :capture
+    else status.to_s
+    end
+  end
 end

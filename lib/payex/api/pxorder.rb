@@ -24,7 +24,7 @@ module PayEx::PxOrder
       },
       'currency' => {
         signed: true,
-        default: proc { PayEx.default_currency }
+        default: proc { PayEx.default_currency! }
       },
       'vat' => {
         signed: true,

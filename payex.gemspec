@@ -11,6 +11,10 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'nori', '~> 1.1'
   gem.add_dependency 'savon', '~> 1.1'
 
+  if RUBY_PLATFORM == 'java'
+    gem.add_dependency 'jruby-openssl', '~> 0.7'
+  end
+
   gem.add_development_dependency 'guard', '~> 1.3'
   gem.add_development_dependency 'guard-bundler', '~> 1.0'
   gem.add_development_dependency 'guard-rspec', '~> 1.2'

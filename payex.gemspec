@@ -14,6 +14,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'guard', '~> 1.3'
   gem.add_development_dependency 'guard-bundler', '~> 1.0'
   gem.add_development_dependency 'guard-rspec', '~> 1.2'
+  gem.add_development_dependency 'rake', '~> 0.9'
   gem.add_development_dependency 'rb-fsevent', '~> 0.9'
   gem.add_development_dependency 'rspec', '~> 2.11'
   gem.add_development_dependency 'savon_spec', '~> 1.3'

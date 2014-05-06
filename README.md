@@ -13,7 +13,7 @@ gem install payex
 
 ## Usage
 
-This library implements the "credit card redirect" method.
+This library only implements the "credit card redirect" method.
 
 Here's how a basic credit card transaction works:
 

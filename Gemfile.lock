@@ -1,13 +1,13 @@
 PATH
   remote: .
   specs:
-    payex (0.2.dev)
+    payex (0.3)
       httpclient (~> 2.2)
       nori (~> 1.1)
       savon (~> 1.1)
 
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     akami (1.2.0)
       gyoku (>= 0.4.0)
@@ -24,7 +24,7 @@ GEM
       guard (>= 1.1)
     gyoku (0.4.6)
       builder (>= 2.1.2)
-    httpclient (2.2.7)
+    httpclient (2.3.4.1)
     httpi (1.1.1)
       rack
     listen (0.5.2)

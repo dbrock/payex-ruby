@@ -3,8 +3,8 @@ PATH
   specs:
     payex (0.3)
       httpclient (~> 2.2)
-      nori (~> 2.6.0)
-      savon (~> 2.11.1)
+      nori (~> 2.6)
+      savon (~> 2.11)
 
 GEM
   remote: https://rubygems.org/

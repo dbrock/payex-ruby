@@ -81,7 +81,7 @@ module PayEx::PxOrder
   end
 
   def Complete(params)
-    PayEx::API.invoke! wsdl, 'Complete', params, {
+    PayEx::API.invoke! wsdl, :complete, params, {
       'accountNumber' => {
         signed: true,
         default: proc { PayEx.account_number! }

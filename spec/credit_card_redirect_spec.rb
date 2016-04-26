@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
 require 'payex'
 require 'spec_helper'
+require "savon/mock/spec_helper"
 
 describe PayEx::CreditCardRedirect do
+  include Savon::SpecHelper
+  before(:all) { savon.mock!   }
+  after(:all)  { savon.unmock! }
+  
   SAMPLE_ACCOUNT_NUMBER = 'SAMPLEACCOUNTNUMBER0001'
   SAMPLE_ENCRYPTION_KEY = 'SAMPLEENCRYPTIONKEY0001'
   SAMPLE_DEFAULT_CURRENCY = 'SEK'
@@ -45,7 +50,8 @@ describe PayEx::CreditCardRedirect do
       }
 
       expected['hash'] = PayEx::API.signed_hash(expected.values.join)
-      savon.expects('Initialize7').with(expected).returns(:initialize_ok)
+      initialize_ok_fixture = File.read('spec/fixtures/initialize7/initialize_ok.xml')
+      savon.expects(:initialize7).with(message: expected).returns(initialize_ok_fixture)
 
       href = PayEx::CreditCardRedirect.initialize_transaction! \
         order_id: SAMPLE_ORDER_ID,
@@ -63,14 +69,15 @@ describe PayEx::CreditCardRedirect do
   SAMPLE_ORDER_REF = 'SAMPLEORDERREF0001'
 
   describe :complete_transaction! do
-    def invoke_complete! response_fixture
+    def invoke_complete! response_fixture_file
       expected = {
         'accountNumber' => SAMPLE_ACCOUNT_NUMBER,
         'orderRef' => SAMPLE_ORDER_REF
       }
 
       expected['hash'] = PayEx::API.signed_hash(expected.values.join)
-      savon.expects('Complete').with(expected).returns(response_fixture)
+      response_fixture = File.read("spec/fixtures/complete/#{response_fixture_file}.xml")
+      savon.expects(:complete).with(message: expected).returns(response_fixture)
       PayEx::CreditCardRedirect.complete_transaction! SAMPLE_ORDER_REF
     end
 

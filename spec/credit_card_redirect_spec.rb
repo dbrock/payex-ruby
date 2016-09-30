@@ -45,7 +45,7 @@ describe PayEx::CreditCardRedirect do
       }
 
       expected['hash'] = PayEx::API.signed_hash(expected.values.join)
-      savon.expects('Initialize7').with(expected).returns(:initialize_ok)
+      savon.expects('Initialize8').with(expected).returns(:initialize_ok)
 
       href = PayEx::CreditCardRedirect.initialize_transaction! \
         order_id: SAMPLE_ORDER_ID,

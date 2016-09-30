@@ -1,4 +1,7 @@
-[![Build Status](https://travis-ci.org/gointeractive/payex-ruby.png)](https://travis-ci.org/gointeractive/payex-ruby)
+[![Build Status](https://travis-ci.org/NorthernCoders/payex-ruby.svg?branch=master)](https://travis-ci.org/NorthernCoders/payex-ruby)
+
+## Thanks for codin'
+All credits goes to the author of this gem. (@dbrock)
 
 ## Installation
 

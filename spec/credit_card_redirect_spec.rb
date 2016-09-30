@@ -50,8 +50,8 @@ describe PayEx::CreditCardRedirect do
       }
 
       expected['hash'] = PayEx::API.signed_hash(expected.values.join)
-      initialize_ok_fixture = File.read('spec/fixtures/initialize7/initialize_ok.xml')
-      savon.expects(:initialize7).with(message: expected).returns(initialize_ok_fixture)
+      initialize_ok_fixture = File.read('spec/fixtures/initialize8/initialize_ok.xml')
+      savon.expects(:initialize8).with(message: expected).returns(initialize_ok_fixture)
 
       href = PayEx::CreditCardRedirect.initialize_transaction! \
         order_id: SAMPLE_ORDER_ID,

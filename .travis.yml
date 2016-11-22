@@ -9,5 +9,7 @@ rvm:
   - jruby-19mode
   - jruby-head
   - ruby-head
+gemfile:
+  - Gemfile
 env:
   - "rack=1.6.4"

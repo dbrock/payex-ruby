@@ -6,7 +6,7 @@ module PayEx::PxOrder
   end
 
   def Initialize7(params)
-    PayEx::API.invoke! wsdl, 'Initialize7', params, {
+    PayEx::API.invoke! wsdl, :initialize7, params, {
       'accountNumber' => {
         signed: true,
         default: proc { PayEx.account_number! }
@@ -81,7 +81,7 @@ module PayEx::PxOrder
   end
 
   def Complete(params)
-    PayEx::API.invoke! wsdl, 'Complete', params, {
+    PayEx::API.invoke! wsdl, :complete, params, {
       'accountNumber' => {
         signed: true,
         default: proc { PayEx.account_number! }

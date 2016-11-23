@@ -15,7 +15,8 @@ module PayEx::API
     # Unwrap e.g. <Initialize8Result>
     response = response[response.keys.first]
     # Parse embedded XML document
-    response = Nori.parse(response)
+    parser = Nori.new(convert_tags_to: lambda { |tag| tag.snakecase.to_sym })
+    response = parser.parse(response)
     # Unwrap <payex>
     response = response[response.keys.first]
 
@@ -29,9 +30,7 @@ module PayEx::API
   end
 
   def invoke_raw! wsdl, name, body
-    Savon.client(wsdl).request(name, body: body) {
-      http.headers.delete('SOAPAction')
-    }.body
+    Savon.client(wsdl: wsdl).call(name, soap_action: false, message: body).body
   end
 
   def signed_hash(string)

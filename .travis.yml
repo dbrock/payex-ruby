@@ -1,7 +1,12 @@
 language: ruby
+# Travis bug, see https://github.com/bundler/bundler/pull/3559
+before_install:
+  - gem install bundler
+  - gem update bundler
 rvm:
   - 1.9.3
   - 2.0.0
-  - jruby-19mode
-  - jruby-head
+  - jruby
   - ruby-head
+env:
+  - "rack=1.6.4"

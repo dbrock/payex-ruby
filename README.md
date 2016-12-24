@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/gointeractive/payex-ruby.png)](https://travis-ci.org/gointeractive/payex-ruby)
-
 ## Installation
 
 This is a rudimentary Ruby binding for the [PayEx API].  You can

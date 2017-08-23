@@ -30,4 +30,4 @@ class PayEx::Error::CardDeclined < PayEx::Error; end
 
 require 'payex/api'
 require 'payex/api/pxorder'
-require 'payex/credit_card_redirect'
+require 'payex/redirect'

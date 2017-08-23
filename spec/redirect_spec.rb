@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 require 'payex'
 require 'spec_helper'
-require "savon/mock/spec_helper"
+require 'savon/mock/spec_helper'
 
-describe PayEx::CreditCardRedirect do
+describe PayEx::Redirect do
   include Savon::SpecHelper
+
   before(:all) { savon.mock!   }
   after(:all)  { savon.unmock! }
-  
+
   SAMPLE_ACCOUNT_NUMBER = 'SAMPLEACCOUNTNUMBER0001'
   SAMPLE_ENCRYPTION_KEY = 'SAMPLEENCRYPTIONKEY0001'
   SAMPLE_DEFAULT_CURRENCY = 'SEK'
@@ -26,7 +27,7 @@ describe PayEx::CreditCardRedirect do
   SAMPLE_RETURN_URL = 'http://example.com/payex-return'
   SAMPLE_CANCEL_URL = 'http://example.com/payex-cancel'
 
-  describe :initialize_transaction! do
+  describe :initialize! do
     example 'successful initialization' do
       expected = {
         'accountNumber' => SAMPLE_ACCOUNT_NUMBER,
@@ -40,7 +41,7 @@ describe PayEx::CreditCardRedirect do
         'description' => SAMPLE_PRODUCT_DESCRIPTION,
         'clientIPAddress' => SAMPLE_IP_ADDRESS,
         'clientIdentifier' => '',
-        'additionalValues' => '',
+        'additionalValues' => 'RESPONSIVE=1',
         'externalID' => '',
         'returnUrl' => SAMPLE_RETURN_URL,
         'view' => 'CREDITCARD',
@@ -48,27 +49,28 @@ describe PayEx::CreditCardRedirect do
         'cancelUrl' => SAMPLE_CANCEL_URL,
         'clientLanguage' => ''
       }
-
       expected['hash'] = PayEx::API.signed_hash(expected.values.join)
+
       initialize_ok_fixture = File.read('spec/fixtures/initialize8/initialize_ok.xml')
       savon.expects(:initialize8).with(message: expected).returns(initialize_ok_fixture)
 
-      href = PayEx::CreditCardRedirect.initialize_transaction! \
+      href = PayEx::Redirect.initialize!(
+        purchase_operation: 'AUTHORIZATION',
+        price: SAMPLE_PRICE_CENTS,
         order_id: SAMPLE_ORDER_ID,
         product_number: SAMPLE_PRODUCT_NUMBER,
-        product_description: SAMPLE_PRODUCT_DESCRIPTION,
-        price: SAMPLE_PRICE_CENTS,
-        customer_ip: SAMPLE_IP_ADDRESS,
+        description: SAMPLE_PRODUCT_DESCRIPTION,
+        client_ip_address: SAMPLE_IP_ADDRESS,
         return_url: SAMPLE_RETURN_URL,
         cancel_url: SAMPLE_CANCEL_URL
-
+      )
       href.should include 'http'
     end
   end
 
   SAMPLE_ORDER_REF = 'SAMPLEORDERREF0001'
 
-  describe :complete_transaction! do
+  describe :complete! do
     def invoke_complete! response_fixture_file
       expected = {
         'accountNumber' => SAMPLE_ACCOUNT_NUMBER,
@@ -78,7 +80,7 @@ describe PayEx::CreditCardRedirect do
       expected['hash'] = PayEx::API.signed_hash(expected.values.join)
       response_fixture = File.read("spec/fixtures/complete/#{response_fixture_file}.xml")
       savon.expects(:complete).with(message: expected).returns(response_fixture)
-      PayEx::CreditCardRedirect.complete_transaction! SAMPLE_ORDER_REF
+      PayEx::Redirect.complete! SAMPLE_ORDER_REF
     end
 
     example 'successful completion' do

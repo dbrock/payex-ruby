@@ -12,7 +12,8 @@ module PayEx::PxOrder
         default: proc { PayEx.account_number! }
       },
       'purchaseOperation' => {
-        signed: true
+        signed: true,
+        default: 'SALE'
       },
       'price' => {
         signed: true,
@@ -52,7 +53,7 @@ module PayEx::PxOrder
       },
       'additionalValues' => {
         signed: true,
-        default: ''
+        default: 'RESPONSIVE=1'
       },
       'externalID' => {
         signed: true,

@@ -11,28 +11,36 @@ gem install payex
 
 ## Usage
 
-This library only implements the "credit card redirect" method.
-
-Here's how a basic credit card transaction works:
-
 ```ruby
 require 'payex'
 
 PayEx.account_number = 123456789
 PayEx.encryption_key = 'e4939be3910ebu194'
 PayEx.default_currency = 'SEK'
-#PayEx.base_url = PayEx::TEST_URL # (use this for testing)
+# PayEx.base_url = PayEx::TEST_URL # (use this for testing)
 
 # (an arbitrary string you can use to identify this transaction)
 my_order_id = 'c704acc45a4bec4c8cd50b73fb01a7c7'
 
-payment_url = PayEx::CreditCardRedirect.initialize_transaction!
+# Credit card example:
+payment_url = PayEx::Redirect.initialize!
+  price: 14900, # (in cents)
   order_id: my_order_id,
   product_number: '123456',
-  product_description: 'Brief product description',
-  price: 14900, # (in cents)
-  customer_ip: '12.34.56.78',
+  description: 'Brief product description',
+  client_ip_address: '12.34.56.78',
   return_url: 'http://example.com/payex-return',
+  cancel_url: 'http://example.com/payex-cancel'
+
+# Swish example:
+payment_url = PayEx::Redirect.initialize!
+  price: 14900, # (in cents)
+  order_id: my_order_id,
+  product_number: '123456',
+  description: 'Brief product description',
+  client_ip_address: '12.34.56.78',
+  return_url: 'http://example.com/payex-return',
+  view: 'SWISH'
   cancel_url: 'http://example.com/payex-cancel'
 ```
 
@@ -40,12 +48,12 @@ After redirecting the customer to `payment_url`, they'll enter their
 payment details and then PayEx will redirect them back to `return_url`
 with a parameter called `orderRef` appended to the query string.
 
-The `PayEx::CreditCardRedirect.complete_transaction!` method takes
+The `PayEx::Redirect.complete!` method takes
 this `orderRef` string as input and returns your order ID as output.
 
 ```ruby
 order_id, error, raw_response =
-  PayEx.complete_transaction! '9b4031c19960da92d'
+  PayEx::Redirect.complete! '9b4031c19960da92d'
 case error
 when nil
   # The transaction succeeded (use `order_id` to proceed).

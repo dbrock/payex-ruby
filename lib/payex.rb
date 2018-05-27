@@ -1,7 +1,7 @@
 module PayEx
   extend self
 
-  TEST_URL = 'https://test-external.payex.com'
+  TEST_URL = 'https://external.externaltest.payex.com/'
   LIVE_URL = 'https://external.payex.com'
 
   attr_accessor :base_url
